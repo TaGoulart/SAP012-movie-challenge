@@ -7,21 +7,43 @@ const App = () => {
     const el = document.createElement('div');
     el.className = 'App';
 
-    el.innerHTML = `
-    <header class="cabecalho">
-      <h1 class="cabecalho__titulo">Filmes de Ficção Científica</h1>
-      <div class="cabecalho__pesquisa">
-        <input type="text" class="cabecalho__pesquisa-input" placeholder="Digite algum filme para pesquisar..." />
-        <span class="cabecalho__pesquisa-lupa">
-          <img src="img/search-icon.svg" alt="" />
-        </span>
-      </div>
-    </header>
-    <section id="filmes">
-    </section>
-    <section class="card__lista-va">
-    </section>
-  `;
+    const header = document.createElement('header');
+    header.className = 'cabecalho';
+    
+    const titulo = document.createElement('h1');
+    titulo.className = 'cabecalho__titulo';
+    titulo.textContent = 'Filmes de Ficção Científica';
+    
+    const pesquisaDiv = document.createElement('div');
+    pesquisaDiv.className = 'cabecalho__pesquisa';
+    
+    const inputPesquisa = document.createElement('input');
+    inputPesquisa.type = 'text';
+    inputPesquisa.className = 'cabecalho__pesquisa-input';
+    inputPesquisa.placeholder = 'Digite algum filme para pesquisar...';
+    
+    const lupaSpan = document.createElement('span');
+    lupaSpan.className = 'cabecalho__pesquisa-lupa';
+    
+    const lupaImg = document.createElement('img');
+    lupaImg.src = 'img/search-icon.svg';
+    lupaImg.alt = '';
+    
+    lupaSpan.appendChild(lupaImg);
+    pesquisaDiv.appendChild(inputPesquisa);
+    pesquisaDiv.appendChild(lupaSpan);
+    header.appendChild(titulo);
+    header.appendChild(pesquisaDiv);
+    
+    const filmesSection = document.createElement('section');
+    filmesSection.id = 'filmes';
+    
+    const listaVaSection = document.createElement('section');
+    listaVaSection.className = 'card__lista-va';
+    
+    el.appendChild(header);
+    el.appendChild(filmesSection);
+    el.appendChild(listaVaSection);
 
     const ElementoParaInserirFilmes = el.querySelector('#filmes');
 
