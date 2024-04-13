@@ -87,8 +87,8 @@ header {
   font-size: 14px;
   line-height: 1.5;
   width: 200px; /* Largura do card */
-  height: 300px; /* Altura do card */
-  background-color: #000; /* Fundo preto */
+  min-height: 100px; /* Altura mínima do resumo */
+  background-color: rgba(0, 0, 0, 0.9); /* Fundo preto */
   color: #fff; /* Letras brancas */
   border-radius: 5px; /* Borda arredondada */
   padding: 20px; /* Espaçamento interno */
@@ -96,8 +96,13 @@ header {
   top: 50%; /* Centralizar verticalmente */
   left: 50%; /* Centralizar horizontalmente */
   transform: translate(-50%, -50%); /* Centralizar completamente */
-  display: none; /* Inicialmente oculto */
+  opacity: 0; /* Inicialmente oculto */
   z-index: 1; /* Garante que a caixa flutuante esteja acima do card */
+  transition: opacity 0.3s ease; /* Adiciona uma transição suave para a opacidade */
+}
+
+.cards:hover .cards__parte3-texto {
+  opacity: 1; /* Torna o resumo visível quando o mouse está sobre o cartão */
 }
 
 
