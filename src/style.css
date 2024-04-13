@@ -1,107 +1,119 @@
 /* Reset CSS básico */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: 'Kumbh Sans', sans-serif;
-    background-color: #111;
-    color: #fff;
-  }
-  
-  header {
-    background-color: transparent;
-    padding: 20px;
-    text-align: center;
-  }
-  
-  .cabecalho__pesquisa-input {
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-    margin-right: 10px;
-    width: 200px;
-    background-color: rgba(255, 255, 255, 0.2);
-    color: #fff;
-  }
-  
-  .cabecalho__pesquisa-lupa img {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-  }
-  
-  #filmes {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  
-  .cards {
-    width: 200px;
-    margin: 20px;
-    background-color: transparent;
-    border-radius: 5px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s ease;
-  }
-  
-  .cards:hover {
-    transform: scale(1.05);
-  }
-  
-  .cards__parte1 {
-    position: relative;
-  }
-  
-  .cards__parte1-capa {
-    width: 100%;
-    height: auto;
-  }
-  
-  .cards__parte2,
-  .cards__parte3 {
-    padding: 20px;
-  }
-  
-  .cards__parte2-titulo {
-    font-size: 16px;
-    margin-bottom: 10px;
-  }
-  
-  .cards__parte2-details {
-    display: flex;
-    align-items: center;
-  }
-  
-  .cards__parte2-icon {
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
-  }
-  
-  .cards__parte3-texto {
-    font-size: 14px;
-    line-height: 1.5;
-  }
-  
-  /* Estilo para a lista de filmes vazia */
-  .card__lista-vazia {
-    text-align: center;
-    padding: 20px;
-    font-size: 18px;
-  }
-  
-  .movie {
-    margin: 10px;
-  }
-  
-  .movie img {
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Kumbh Sans', sans-serif;
+  background-color: #111;
+  color: #fff;
+}
+
+header {
+  background-color: transparent;
+  padding: 20px;
+  text-align: center;
+}
+
+.cabecalho__pesquisa-input {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  margin-right: 10px;
+  width: 200px;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.cabecalho__pesquisa-lupa img {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+#filmes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cards {
+  width: 200px;
+  margin: 20px;
+  background-color: transparent;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
+}
+
+.cards:hover {
+  transform: scale(1.05);
+}
+
+.cards__parte1 {
+  position: relative;
+}
+
+.cards__parte1-capa {
+  width: 100%;
+  height: auto;
+}
+
+.cards__parte2,
+.cards__parte3 {
+  padding: 20px;
+}
+
+.cards__parte2-titulo {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.cards__parte2-details {
+  display: flex;
+  align-items: center;
+}
+
+.cards__parte2-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.cards__parte3-texto {
+  font-size: 14px;
+  line-height: 1.5;
+  width: 200px; /* Largura do card */
+  height: 300px; /* Altura do card */
+  background-color: #000; /* Fundo preto */
+  color: #fff; /* Letras brancas */
+  border-radius: 5px; /* Borda arredondada */
+  padding: 20px; /* Espaçamento interno */
+  position: absolute; /* Posicionamento absoluto */
+  top: 50%; /* Centralizar verticalmente */
+  left: 50%; /* Centralizar horizontalmente */
+  transform: translate(-50%, -50%); /* Centralizar completamente */
+  display: none; /* Inicialmente oculto */
+  z-index: 1; /* Garante que a caixa flutuante esteja acima do card */
+}
+
+
+/* Estilo para a lista de filmes vazia */
+.card__lista-vazia {
+  text-align: center;
+  padding: 20px;
+  font-size: 18px;
+}
+
+.movie {
+  margin: 10px;
+}
+
+.movie img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
