@@ -58,8 +58,9 @@ header {
 }
 
 .cards__parte1-capa {
-  width: 100%;
-  height: auto;
+  width: 100%; /* Definindo a largura máxima da imagem como 100% do contêiner pai */
+  max-width: 200px; /* Largura máxima igual à largura do cartão */
+  height: auto; /* Permitindo que a altura seja ajustada automaticamente para manter a proporção da imagem */
 }
 
 .cards__parte2,
@@ -114,11 +115,21 @@ header {
 }
 
 .movie {
-  margin: 10px;
+  width: 100%;
+  max-width: 200px; /* Largura máxima igual à largura do cartão */
+  height: auto;
+  border-radius: 5px;
 }
 
 .movie img {
   width: 100%;
+  max-width: 200px; /* Largura máxima igual à largura do cartão */
+  height: auto;
+  border-radius: 5px;
+}
+.poster-img {
+  width: 100%;
+  max-width: 200px; /* Largura máxima igual à largura do cartão */
   height: auto;
   border-radius: 5px;
 }

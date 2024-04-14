@@ -1,7 +1,20 @@
-// components/App.js
+// app.js
 
 import { fetchTodosFilmesFiccaoCientifica } from '../lib/api.js';
 import { Card } from './card.js';
+import { fetchMovieDetails } from '../lib/api.js';
+import { updateContent } from './routes.js'; // Importa a função updateContent do arquivo routes.js
+
+// Função para inicializar o aplicativo
+function initializeApp() {
+  // Lógica de inicialização do aplicativo, se necessário
+}
+
+// Inicializa o aplicativo quando o conteúdo da página for carregado
+document.addEventListener('DOMContentLoaded', () => {
+  initializeApp();
+  updateContent();
+});
 
 const App = () => {
     const el = document.createElement('div');
@@ -36,7 +49,7 @@ const App = () => {
     header.appendChild(titulo);
     header.appendChild(pesquisaDiv);
     
-     // Criação da seção para exibir os filmes
+    // Criação da seção para exibir os filmes
     const filmesSection = document.createElement('section');
     filmesSection.id = 'filmes';
     
@@ -47,10 +60,10 @@ const App = () => {
     el.appendChild(filmesSection);
     el.appendChild(listaVaSection);
 
-    //uma referência ao elemento onde os filmes serão inseridos na tela.
+    // Uma referência ao elemento onde os filmes serão inseridos na tela
     const ElementoParaInserirFilmes = el.querySelector('#filmes');
     
-     // Criação da seção para a paginação
+    // Criação da seção para a paginação
     const Paginacao = document.createElement('div');
     Paginacao.className = 'paginacao';
 
@@ -75,31 +88,86 @@ const App = () => {
             paginaAtual = 1;
         }
         fetchTodosFilmesFiccaoCientifica(paginaAtual)
-            .then(filmes => InserirFilmesNaTela(filmes))
+            .then(filmes => {
+                InserirFilmesNaTela(filmes); // Insere os filmes da próxima página na tela
+                // Adiciona eventos de clique aos cartões de filme da próxima página
+                filmes.forEach(movie => {
+                    adicionarEventoClique(movie.id);
+                });
+            })
             .catch(error => console.error('Ocorreu um erro:', error));
     }
 
     function InserirFilmesNaTela(filmes) {
         ElementoParaInserirFilmes.innerHTML = '';
         filmes.forEach(movie => {
-            const card = Card(movie);
+            const card = Card(movie, exibirDetalhesFilme); // Passa a função exibirDetalhesFilme para o componente Card
             ElementoParaInserirFilmes.appendChild(card);
+        });
+    }
+
+    // Função para exibir os detalhes de um filme específico
+    async function exibirDetalhesFilme(filmeId) {
+        try {
+            // Busca os detalhes do filme
+            const filme = await fetchMovieDetails(filmeId);
+
+            // Cria os elementos HTML para exibir os detalhes do filme
+            const detalhesContainer = document.createElement('div');
+
+            const titulo = document.createElement('h1');
+            titulo.textContent = filme.title;
+
+            const sinopse = document.createElement('p');
+            sinopse.textContent = filme.overview;
+
+            // Adiciona a imagem do poster, se disponível
+            if (filme.poster_path) {
+                const posterImg = document.createElement('img');
+                posterImg.src = `https://image.tmdb.org/t/p/w500/${filme.poster_path}`;
+                posterImg.alt = 'Poster';
+                posterImg.classList.add('poster-img'); // Adiciona a classe poster-img
+                detalhesContainer.appendChild(posterImg);
+            }
+
+            // Adiciona os elementos à página
+            detalhesContainer.appendChild(titulo);
+            detalhesContainer.appendChild(sinopse);
+
+            // Limpa o conteúdo atual e adiciona os detalhes do filme
+            filmesSection.innerHTML = '';
+            filmesSection.appendChild(detalhesContainer);
+        } catch (error) {
+            console.error('Ocorreu um erro ao buscar os detalhes do filme:', error);
+            // Exibe uma mensagem de erro na página
+            filmesSection.innerHTML = "<p>Ocorreu um erro ao buscar os detalhes do filme.</p>";
+        }
+    }
+
+    function adicionarEventoClique(filmeId) {
+        const cartao = document.getElementById(filmeId);
+        cartao.addEventListener('click', () => {
+            exibirDetalhesFilme(filmeId);
         });
     }
 
     // Inicialmente carrega a primeira página de filmes
     fetchTodosFilmesFiccaoCientifica(paginaAtual)
-        .then(filmes => InserirFilmesNaTela(filmes))
+        .then(filmes => {
+            InserirFilmesNaTela(filmes); // Insere os filmes da primeira página na tela
+            // Adiciona eventos de clique aos cartões de filme da primeira página
+            filmes.forEach(movie => {
+                adicionarEventoClique(movie.id);
+            });
+        })
         .catch(error => console.error('Ocorreu um erro:', error));
 
     const home = el.querySelector('.cabecalho__titulo');
     home.addEventListener('click', () => {
-        fetchTodosFilmesFiccaoCientifica(paginaAtual)
-            .then(filmes => InserirFilmesNaTela(filmes))
-            .catch(error => console.error('Ocorreu um erro:', error));
+        // Quando o título do cabeçalho for clicado, redirecione para a página inicial
+        window.history.pushState({}, '', '/');
+        updateContent(); // Atualiza o conteúdo da página
     });
-
-    
 
     return el;
 }

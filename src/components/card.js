@@ -1,13 +1,14 @@
 // card.js
 
 function Card(filme) {
-    const { title, release_date, poster_path, vote_average, vote_count, overview } = filme;
+    const { id, title, release_date, poster_path, vote_average, vote_count } = filme;
     const releaseYear = release_date.split('-')[0];
     const posterPath = `https://image.tmdb.org/t/p/w500/${poster_path}`;
     const rating = vote_average.toFixed(1);
 
     const section = document.createElement('section');
     section.className = 'cards';
+    section.id = id;
 
     const parte1 = document.createElement('div');
     parte1.className = 'cards__parte1';
@@ -47,41 +48,15 @@ function Card(filme) {
     parte2.appendChild(details);
     section.appendChild(parte2);
 
-    // Adicionando evento de clique para alternar a visibilidade do resumo
-    img.addEventListener('click', () => toggleResumo(section, overview)); // Passe o resumo do filme para a função toggleResumo
-
-    // Adicionando evento de mouseover para mostrar o resumo quando o mouse estiver sobre o poster
-    img.addEventListener('mouseover', () => showResumo(section, overview));
-
-    // Adicionando evento de mouseout para ocultar o resumo quando o mouse sair do poster
-    img.addEventListener('mouseout', () => hideResumo(section));
-
-    const parte3 = document.createElement('div');
-    parte3.className = 'cards__parte3';
-
-    const texto = document.createElement('p');
-    texto.className = 'cards__parte3-texto';
-    parte3.appendChild(texto);
-    section.appendChild(parte3);
+    // Adicionando evento de clique para navegar para a página de detalhes do filme
+    section.addEventListener('click', () => {
+        // Atualiza a URL sem recarregar a página para exibir os detalhes do filme
+        window.history.pushState({}, '', `/movie/${id}`);
+        // Dispara o evento popstate para atualizar o conteúdo da página
+        window.dispatchEvent(new Event('popstate'));
+    });
 
     return section;
-}
-
-function toggleResumo(section, overview) {
-    const parte3 = section.querySelector('.cards__parte3-texto');
-    parte3.textContent = overview; // Define o conteúdo do resumo com o valor de overview
-    parte3.style.display = parte3.style.display === 'none' || parte3.style.display === '' ? 'block' : 'none';
-}
-
-function showResumo(section, overview) {
-    const parte3 = section.querySelector('.cards__parte3-texto');
-    parte3.textContent = overview; // Define o conteúdo do resumo com o valor de overview
-    parte3.style.display = 'block';
-}
-
-function hideResumo(section) {
-    const parte3 = section.querySelector('.cards__parte3-texto');
-    parte3.style.display = 'none';
 }
 
 export { Card };
