@@ -1,17 +1,5 @@
 // routes.js
 
-// Funções para as rotas
-function HomePage() {
-    // Lógica para exibir a página inicial
-}
-
-function MovieDetailsPage() {
-    // Lógica para exibir os detalhes de um filme
-}
-
-function notFoundPage() {
-    // Lógica para exibir uma página de "Rota não encontrada"
-}
 
 // Objeto que mapeia as rotas para as funções correspondentes
 const routes = {
@@ -44,3 +32,17 @@ document.addEventListener('click', event => {
 });
 
 export { updateContent };
+
+
+// Funções para as rotas
+//function HomePage() {
+    // Lógica para exibir a página inicial
+//}
+
+//function MovieDetailsPage() {
+    // Lógica para exibir os detalhes de um filme
+//}
+
+//function notFoundPage() {
+    // Lógica para exibir uma página de "Rota não encontrada"
+//}

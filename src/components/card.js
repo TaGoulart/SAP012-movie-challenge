@@ -1,14 +1,14 @@
 // card.js
 
-function Card(filme) {
-    const { id, title, release_date, poster_path, vote_average, vote_count } = filme;
+function Card(filme, onClick) {
+    const { id, title, release_date, poster_path, vote_average } = filme;
     const releaseYear = release_date.split('-')[0];
     const posterPath = `https://image.tmdb.org/t/p/w500/${poster_path}`;
     const rating = vote_average.toFixed(1);
 
     const section = document.createElement('section');
     section.className = 'cards';
-    section.id = id;
+    section.dataset.movieId = id; // Adiciona o ID do filme como um atributo de dados
 
     const parte1 = document.createElement('div');
     parte1.className = 'cards__parte1';
@@ -33,12 +33,12 @@ function Card(filme) {
 
     const ratingDiv = document.createElement('div');
     const ratingImg = document.createElement('img');
-    ratingImg.src = 'images/star.jpg';
-    ratingImg.alt = 'star';
+    //ratingImg.src = 'images/star.jpg';
+    //ratingImg.alt = 'star';
     ratingImg.className = 'cards__parte2-icon';
     const ratingText = document.createElement('h2');
     ratingText.className = 'cards__parte2-text';
-    ratingText.textContent = `${rating} (${vote_count} votes)`;
+    ratingText.textContent = `${rating}`;
 
     ratingDiv.appendChild(ratingImg);
     ratingDiv.appendChild(ratingText);
@@ -48,12 +48,9 @@ function Card(filme) {
     parte2.appendChild(details);
     section.appendChild(parte2);
 
-    // Adicionando evento de clique para navegar para a página de detalhes do filme
+    // Adiciona o evento de clique ao chamar a função fornecida
     section.addEventListener('click', () => {
-        // Atualiza a URL sem recarregar a página para exibir os detalhes do filme
-        window.history.pushState({}, '', `/movie/${id}`);
-        // Dispara o evento popstate para atualizar o conteúdo da página
-        window.dispatchEvent(new Event('popstate'));
+        onClick(id);
     });
 
     return section;
