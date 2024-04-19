@@ -65,7 +65,7 @@ const App = () => {
 
       // Cria os elementos HTML para exibir os detalhes do filme
       const detalhesContainer = document.createElement('div');
-
+      //estou criando o titulo
       const titulo = document.createElement('h1');
       titulo.textContent = filme.title;
 
